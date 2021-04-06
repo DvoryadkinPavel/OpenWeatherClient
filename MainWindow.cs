@@ -7,6 +7,7 @@ namespace Weather
     class MainWindow : Window
     {
         [UI] private Label _label1 = null;
+        [UI] private Label _label2 = null;
         [UI] private Button _button1 = null;
 
         public MainWindow() : this(new Builder("MainWindow.glade")) { }
@@ -18,6 +19,7 @@ namespace Weather
             DeleteEvent += Window_DeleteEvent;
             _button1.Clicked += Button1_Clicked;
             _label1.Text = OpenWeather.Now();
+            _label2.Text = OpenWeather.Hourly();
         }
 
         private void Window_DeleteEvent(object sender, DeleteEventArgs a)
@@ -29,6 +31,7 @@ namespace Weather
         {     
             _label1.Text = "Отправляется запрос...";
             _label1.Text = OpenWeather.Now();
+            _label2.Text = OpenWeather.Hourly();
         }
 
     }
