@@ -6,6 +6,7 @@ namespace Weather
 {    
     public static class OpenWeather
     {
+        public static LocationSettings CurrentSettings;
         private static string _apikey;
         /// <summary>
         /// Запишите ваш API ключ в файл apikey.txt и поместите его в папку приложения
@@ -30,7 +31,7 @@ namespace Weather
             try
             {
                 var client = new RestClient("https://api.openweathermap.org");
-                var request = new RestRequest($"/data/2.5/weather?q=tomsk&appid={ApiKey}&units=metric&&lang=ru", Method.GET);
+                var request = new RestRequest($"/data/2.5/weather?q={CurrentSettings.City}&appid={ApiKey}&units=metric&&lang=ru", Method.GET);
                 var queryResult = client.Execute(request);
                 var response =  JObject.Parse(queryResult.Content);
                 var description = response["weather"][0]["description"].ToString();
@@ -57,7 +58,7 @@ namespace Weather
             try
             {
                 var client = new RestClient("https://api.openweathermap.org");
-                var request = new RestRequest($"/data/2.5/onecall?lat=56.4977100&lon=84.9743700&exclude=hourly&appid={ApiKey}&units=metric&&lang=ru", 
+                var request = new RestRequest($"/data/2.5/onecall?lat={CurrentSettings.Lattitude}&lon={CurrentSettings.Longitude}&exclude=hourly&appid={ApiKey}&units=metric&&lang=ru", 
                                                 Method.GET);
                 var queryResult = client.Execute(request);
                 var response =  JObject.Parse(queryResult.Content);

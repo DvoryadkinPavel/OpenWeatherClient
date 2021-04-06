@@ -10,7 +10,7 @@ namespace Weather
         {
             Application.Init();
 
-            var app = new Application("org.Weather.Weather", GLib.ApplicationFlags.None);
+            var app = new Application("OpenWeatherClient", GLib.ApplicationFlags.None);
             app.Register(GLib.Cancellable.Current);
 
             var win = new MainWindow();

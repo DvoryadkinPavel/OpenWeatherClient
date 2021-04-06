@@ -1,6 +1,7 @@
 using System;
 using Gtk;
 using UI = Gtk.Builder.ObjectAttribute;
+using Newtonsoft.Json;
 
 namespace Weather
 {
@@ -15,7 +16,8 @@ namespace Weather
         private MainWindow(Builder builder) : base(builder.GetObject("MainWindow").Handle)
         {
             builder.Autoconnect(this);
-
+            ReadSettings();
+            Title += $" ({OpenWeather.CurrentSettings.City.ToUpper()})";
             DeleteEvent += Window_DeleteEvent;
             _button1.Clicked += Button1_Clicked;
             _label1.Text = OpenWeather.Now();
@@ -33,6 +35,10 @@ namespace Weather
             _label1.Text = OpenWeather.Now();
             _label2.Text = OpenWeather.Hourly();
         }
-
+        private void ReadSettings()
+        {
+            var json = System.IO.File.ReadAllText("settings.json");
+            OpenWeather.CurrentSettings = JsonConvert.DeserializeObject<LocationSettings>(json);
+        }
     }
 }
