@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
 using RestSharp;
-using System.Collections.Generic;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Weather
@@ -10,6 +7,9 @@ namespace Weather
     public static class OpenWeather
     {
         private static string _apikey;
+        /// <summary>
+        /// Запишите ваш API ключ в файл apikey.txt и поместите его в папку приложения
+        /// </summary>
         private static string ApiKey 
         {
             get
@@ -21,6 +21,9 @@ namespace Weather
                 return _apikey;
             }
         }
+        /// <summary>
+        /// Погода сейчас
+        /// </summary>
         public static string Now()
         {
             var res = "";
@@ -45,6 +48,9 @@ namespace Weather
             
             return res;
         }
+        /// <summary>
+        /// Прогноз на 3 дня
+        /// </summary>
         public static string Hourly()
         {
             var res = "";
